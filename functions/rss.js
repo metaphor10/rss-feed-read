@@ -5,6 +5,7 @@ function getActivity(rssFeedObject, days ){
     console.log("getActivity")
     keys = Object.keys(rssFeedObject)
     let date_ob = new Date();
+    date_ob.setDate(date_ob.getDate() - days);
     keys.forEach( function (key){
         parser.parseURL(rssFeedObject[key], function(err, feed) {
         if (err) throw err;
