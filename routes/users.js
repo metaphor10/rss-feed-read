@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.json({users: [{name: 'Timmy'}]});
 });
 
+router.post('/', function(req, res, next) {
+  console.log(req.body)
+  
+  res.json({users: [{name: 'Timmy'}]});
+});
+
+
 module.exports = router;
