@@ -39,58 +39,7 @@ function getActivity(rssFeedObject, days ){
         })
         promises.push(p1)
     })
-    // (async function loop() {
-    //     for (key of keys) {
-    //         fetch(rssFeedObject[key])
-    //         .then(response => response.text())
-    //         .then(str => parser.parseString(str))
-    //         .then(feed => {
-    //             console.log(feed.title)
-    //             feed.items.forEach(function(entry) {
-    //                 console.log(entry.title + ':' + entry.link);
-    //                 console.log(entry.pubDate)
-    //                 feedTimeISO = new Date(entry.isoDate)
-    //                 diff = feedTimeISO.getTime() - date_ob.getTime()
-    //                 if (diff > 0){
-    //                     console.log("changed sooner then " + days + " ago")
-    //                 }else {
-    //                     console.log("has not changed in the last "+ days)
-    //                     // console.log("date" + entry.pubDate)
-    //                     console.log(key)
-    //                     results.push(key)
-    //                 }
-    //             })
 
-    //         })
-    //     // })
-    //         }
-    // })().then(function (){
-    //     console.log("results1" + results)
-    //     return results;
-    // });
-        // keys.forEach(function (key){
-        //     fetch(rssFeedObject[key])
-        //     .then(response => response.text())
-        //     .then(str => parser.parseString(str))
-        //     .then(feed => {
-        //         console.log(feed.title)
-        //         feed.items.forEach(function(entry) {
-        //             console.log(entry.title + ':' + entry.link);
-        //             console.log(entry.pubDate)
-        //             feedTimeISO = new Date(entry.isoDate)
-        //             diff = feedTimeISO.getTime() - date_ob.getTime()
-        //             if (diff > 0){
-        //                 console.log("changed sooner then " + days + " ago")
-        //             }else {
-        //                 console.log("has not changed in the last "+ days)
-        //                 // console.log("date" + entry.pubDate)
-        //                 console.log(key)
-        //                 results.push(key)
-        //             }
-        //         })
-
-        //     })
-        // })
     Promise.all(promises).then((values)=> {
         console.log("all values"+ values)
         results = values
@@ -98,8 +47,7 @@ function getActivity(rssFeedObject, days ){
     })
 })
 return p3
-    // console.log("results1" + results)
-    // return results;
+
 }
 
 module.exports = { getActivity };
