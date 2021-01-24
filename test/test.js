@@ -1,12 +1,12 @@
 const request = require('supertest');
 const app = require('../app.js');
 
-describe('GET /', function() {
+describe('GET /api/v1/companies', function() {
   it('return json response', function() {
     return request(app)
-      .get('/')
+      .get('/api/v1/companies')
       .expect(200)
       .expect('Content-Type',/json/)
-      .expect('{"text":"some json"}')
+      .expect('{"users":[{"name":"Timmy"}]}')
   })
 })
