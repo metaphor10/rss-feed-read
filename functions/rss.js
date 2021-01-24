@@ -25,6 +25,7 @@ function getActivity(rssFeedObject, days ){
                     diff = feedTimeISO.getTime() - date_ob.getTime()
                     if (diff > 0){
                         console.log("changed sooner then " + days + " ago")
+                        resolve("")
                     }else {
                         console.log("has not changed in the last "+ days)
                         // console.log("date" + entry.pubDate)
