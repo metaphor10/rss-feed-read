@@ -4,13 +4,15 @@ let parser = new Parser();
 const fetch = require('node-fetch');
 
 function getActivity(rssFeedObject, days ){
+    const p3 = new Promise((resolve, reject) => {
     console.log("getActivity")
     keys = Object.keys(rssFeedObject)
     results = []
     let date_ob = new Date();
     date_ob.setDate(date_ob.getDate() - days);
-    (async function loop() {
-        for (key of keys) {
+    promises = []
+    keys.forEach(function (key){
+        p1 = new Promise ((resolve, reject) => {
             fetch(rssFeedObject[key])
             .then(response => response.text())
             .then(str => parser.parseString(str))
@@ -27,19 +29,46 @@ function getActivity(rssFeedObject, days ){
                         console.log("has not changed in the last "+ days)
                         // console.log("date" + entry.pubDate)
                         console.log(key)
-                        results.push(key)
+                        // results.push(key)
+                        resolve(key)
                     }
                 })
-
+    
             })
-        // })
-            }
-    })().then(function (){
-        console.log("results1" + results)
-        return results;
-    });
+
+        })
+        promises.push(p1)
+    })
+    // (async function loop() {
+    //     for (key of keys) {
+    //         fetch(rssFeedObject[key])
+    //         .then(response => response.text())
+    //         .then(str => parser.parseString(str))
+    //         .then(feed => {
+    //             console.log(feed.title)
+    //             feed.items.forEach(function(entry) {
+    //                 console.log(entry.title + ':' + entry.link);
+    //                 console.log(entry.pubDate)
+    //                 feedTimeISO = new Date(entry.isoDate)
+    //                 diff = feedTimeISO.getTime() - date_ob.getTime()
+    //                 if (diff > 0){
+    //                     console.log("changed sooner then " + days + " ago")
+    //                 }else {
+    //                     console.log("has not changed in the last "+ days)
+    //                     // console.log("date" + entry.pubDate)
+    //                     console.log(key)
+    //                     results.push(key)
+    //                 }
+    //             })
+
+    //         })
+    //     // })
+    //         }
+    // })().then(function (){
+    //     console.log("results1" + results)
+    //     return results;
+    // });
         // keys.forEach(function (key){
-        //     for await (key of keys) {
         //     fetch(rssFeedObject[key])
         //     .then(response => response.text())
         //     .then(str => parser.parseString(str))
@@ -61,9 +90,14 @@ function getActivity(rssFeedObject, days ){
         //         })
 
         //     })
-        // // })
-        //     }
- 
+        // })
+    Promise.all(promises).then((values)=> {
+        console.log("all values"+ values)
+        results = values
+        resolve(values)
+    })
+})
+return p3
     // console.log("results1" + results)
     // return results;
 }
