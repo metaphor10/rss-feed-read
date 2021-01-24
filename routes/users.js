@@ -21,7 +21,9 @@ router.post('/', function(req, res, next) {
   
   Promise.all([p3]).then(values => {
     console.log("values", values)
-    req.results = values
+    arr = values[0].filter(v=>v);
+    console.log("arr" + arr)
+    req.results = arr
     
     next()
   })
