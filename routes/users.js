@@ -14,9 +14,14 @@ router.post('/', function(req, res, next) {
   // req.results = activity.getActivity(req.body.rss, req.body.days)
   // req.results= "hello"
   var p3 = new Promise((resolve, reject) => {
-    foo = activity.getActivity(req.body.rss, req.body.days)
-    console.log("foo"+ foo)
-    resolve(foo)
+    try {
+      foo = activity.getActivity(req.body.rss, req.body.days)
+      resolve(foo)
+    } catch (error){
+      reject()
+    }
+    // console.log("foo"+ foo)
+    // resolve(foo)
   });
   
   Promise.all([p3]).then(values => {
