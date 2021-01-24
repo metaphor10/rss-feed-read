@@ -10,8 +10,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log(req.body)
   console.log(req.body.rss)
-  activity.getActivity(req.body.rss, 9)
-  res.json({users: [{name: 'Timmy'}]});
+  results = activity.getActivity(req.body.rss, req.body.days)
+  res.json({results: results});
 });
 
 
