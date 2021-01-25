@@ -11,6 +11,15 @@ router.post('/', function(req, res, next) {
   console.log(req.body)
   console.log(req.body.rss)
   
+  keys = Object.keys(req.body.rss)
+  keysToRemove =[]
+  keys.forEach((key) => {
+    if (req.body.rss[key]=== '' || req.body.rss[key]=== ' ' ){
+      req.results = "missing url " + key
+      next()
+    }
+  })
+
   // req.results = activity.getActivity(req.body.rss, req.body.days)
   // req.results= "hello"
   var p3 = new Promise((resolve, reject) => {
