@@ -31,3 +31,7 @@ run command `npm test`
 ## linting
 use the command `npm run lint`
 
+## pull requests 
+
+everytime you do a pull request it will run the lint and the unit test to make sure the code works. and if the build passes then code can be merged into main branch. 
+
