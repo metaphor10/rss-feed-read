@@ -14,12 +14,12 @@ router.post('/', function(req, res, next) {
   // req.results = activity.getActivity(req.body.rss, req.body.days)
   // req.results= "hello"
   var p3 = new Promise((resolve, reject) => {
-    try {
-      foo = activity.getActivity(req.body.rss, req.body.days)
+
+      foo = activity.getActivity(req.body.rss, req.body.days).catch((error) => {
+        reject(error)
+      })
       resolve(foo)
-    } catch (error){
-      reject()
-    }
+
     // console.log("foo"+ foo)
     // resolve(foo)
   });
@@ -30,6 +30,9 @@ router.post('/', function(req, res, next) {
     console.log("arr" + arr)
     req.results = arr
     
+    next()
+  }).catch((error) => {
+    reject(error)
     next()
   })
   // res.json({results: "values"});
