@@ -25,6 +25,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: npm install
     - run: ./node_modules/mocha/bin/mocha --timeout 10000
     - run: ./node_modules/.bin/eslint 'functions/**/*.js?(x)'
 
