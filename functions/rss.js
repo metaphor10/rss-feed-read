@@ -14,31 +14,37 @@ function getActivity(rssFeedObject, days ){
     keys.forEach(function (key){
         if (rssFeedObject[key] !== ''){
             p1 = new Promise ((resolve, reject) => {
-                fetch(rssFeedObject[key])
-                .then(response => response.text())
-                .then(str => parser.parseString(str))
-                .then(feed => {
-                    console.log(feed.title)
-                    feed.items.forEach(function(entry) {
-                        console.log(entry.title + ':' + entry.link);
-                        console.log(entry.pubDate)
-                        feedTimeISO = new Date(entry.isoDate)
-                        diff = feedTimeISO.getTime() - date_ob.getTime()
-                        if (diff > 0){
-                            console.log("changed sooner then " + days + " ago")
-                            resolve("")
-                        }else {
-                            console.log("has not changed in the last "+ days)
-                            // console.log("date" + entry.pubDate)
-                            console.log(key)
-                            // results.push(key)
-                            resolve(key)
-                        }
+
+                    fetch(rssFeedObject[key])
+                    .then(response => response.text())
+                    .then(str => parser.parseString(str))
+                    .then(feed => {
+                        console.log(feed.title)
+                        feed.items.forEach(function(entry) {
+                            console.log(entry.title + ':' + entry.link);
+                            console.log(entry.pubDate)
+                            feedTimeISO = new Date(entry.isoDate)
+                            diff = feedTimeISO.getTime() - date_ob.getTime()
+                            if (diff > 0){
+                                console.log("changed sooner then " + days + " ago")
+                                resolve("")
+                            }else {
+                                console.log("has not changed in the last "+ days)
+                                // console.log("date" + entry.pubDate)
+                                console.log(key)
+                                // results.push(key)
+                                resolve(key)
+                            }
+                        })
+            
+                    }).catch ((error) => {
+                        reject(error)
                     })
-        
-                })
+
+
     
             })
+
             promises.push(p1)
         }else {
             reject()
@@ -49,6 +55,8 @@ function getActivity(rssFeedObject, days ){
         console.log("all values"+ values)
         results = values
         resolve(values)
+    }).catch(error => {
+        console.log(error)
     })
 })
 return p3
