@@ -22,3 +22,9 @@ rss - is for the object with the name as field and url as value
 
 and days is for number of days back that had updates to rss field
 
+## testing
+run ./node_modules/mocha/bin/mocha --timeout 10000
+
+## linting
+use the command npm run lint
+
